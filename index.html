@@ -46,7 +46,7 @@
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     const gravity = 0.4;
-    const jump = -5;
+    const jump = -20;
     let birdY = 250;
     let birdVelocity = 0;
     const birdX = 80;
@@ -112,7 +112,7 @@
           birdX - birdSize < pipe.x + pipe.width &&
           (birdY - birdSize < pipe.top || birdY + birdSize > pipe.top + pipe.gap)
         ) {
-          gameOver();
+        //  gameOver();
         }
 
         // Increase score
@@ -124,7 +124,7 @@
 
       // Ground Collision
       if (birdY + birdSize > canvas.height || birdY < 0) {
-        gameOver();
+      //  gameOver();
       }
 
       drawScore();
