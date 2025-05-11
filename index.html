@@ -45,8 +45,8 @@
   </div>  <script>
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
-    const gravity = 0.4;
-    const jump = -20;
+    const gravity = 0.5;
+    const jump = -10;
     let birdY = 250;
     let birdVelocity = 0;
     const birdX = 80;
@@ -95,6 +95,13 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       birdVelocity += gravity;
       birdY += birdVelocity;
+
+      // Clamp bird to bottom of canvas
+      if (birdY + birdSize >= canvas.height) {
+        birdY = canvas.height - birdSize;
+        birdVelocity = 0;
+      }
+
       drawBird();
 
       // Pipes
@@ -122,9 +129,10 @@
       });
       pipes = pipes.filter(pipe => pipe.x + pipe.width > 0);
 
-      // Ground Collision
-      if (birdY + birdSize > canvas.height || birdY < 0) {
-      //  gameOver();
+      // Top boundary check
+      if (birdY - birdSize < 0) {
+        birdY = birdSize;
+        birdVelocity = 0;
       }
 
       drawScore();
@@ -139,7 +147,7 @@
     }
 
     function gameOver() {
-      gameRunning = true;
+      gameRunning = false;
       gameOverScreen.style.display = 'block';
     }
 
