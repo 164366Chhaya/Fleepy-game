@@ -112,7 +112,7 @@
           birdX - birdSize < pipe.x + pipe.width &&
           (birdY - birdSize < pipe.top || birdY + birdSize > pipe.top + pipe.gap)
         ) {
-        //  gameOver();
+          gameOver();
         }
 
         // Increase score
@@ -139,7 +139,7 @@
     }
 
     function gameOver() {
-      gameRunning = false;
+      gameRunning = true;
       gameOverScreen.style.display = 'block';
     }
 
